@@ -14,11 +14,11 @@ variable "cloudflare_api_token" {
 }
 
 variable "web_sites" {
-  type        = list(object({ subdomain = string, versioning_enabled = bool, index_document = string, error_document = string, dns_name = string, dns_ttl = number }))
+  type        = list(object({ subdomain = string, versioning_enabled = bool, index_document = string, error_document = string, dns_name = string, dns_ttl = number, proxied = bool }))
   description = "Web sites to be hosted in S3 with DNS record in Cloudflare"
 }
 
 variable "redirects" {
-  type        = list(object({ subdomain = string, redirect_url = string, dns_name = string, dns_ttl = number }))
+  type        = list(object({ subdomain = string, redirect_url = string, dns_name = string, dns_ttl = number, proxied = bool }))
   description = "Web sites to be hosted in S3 with DNS record in Cloudflare"
 }
