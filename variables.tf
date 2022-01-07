@@ -22,3 +22,8 @@ variable "redirects" {
   type        = list(object({ subdomain = string, redirect_url = string, dns_name = string, dns_ttl = number, proxied = bool }))
   description = "Web sites to be hosted in S3 with DNS record in Cloudflare"
 }
+
+variable "s3_origin_id" {
+  type        = string
+  description = "Unique s3 origin ID for Cloudfront distribution"
+}
