@@ -10,6 +10,8 @@ resource "aws_cloudfront_distribution" "this" {
   is_ipv6_enabled     = true
   default_root_object = "index.html"
 
+  aliases = [var.web_sites[count.index].subdomain]
+
   default_cache_behavior {
     allowed_methods  = ["GET", "HEAD", "OPTIONS"]
     cached_methods   = ["GET", "HEAD"]
@@ -40,7 +42,8 @@ resource "aws_cloudfront_distribution" "this" {
 
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn = aws_acm_certificate.wildcard.arn
+    ssl_support_method  = "sni-only"
   }
 
   # needed to ensure react manages routes when immediately browsing to a path other than the index
