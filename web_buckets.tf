@@ -11,23 +11,6 @@ resource "aws_s3_bucket" "web" {
   website {
     index_document = var.web_sites[count.index].index_document
     error_document = var.web_sites[count.index].error_document
-    routing_rules = <<EOF
-[{
-    "Condition": {
-        "HttpErrorCodeReturnedEquals": "404"
-    },
-    "Redirect": {
-        "HostName": "${var.web_sites[count.index].subdomain}"
-    }
-}, {
-    "Condition": {
-        "HttpErrorCodeReturnedEquals": "403"
-    },
-    "Redirect": {
-        "HostName": "${var.web_sites[count.index].subdomain}"
-    }
-}]
-EOF
   }
 
   policy = <<EOT

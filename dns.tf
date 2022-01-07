@@ -8,7 +8,7 @@ resource "cloudflare_record" "web" {
   zone_id = data.cloudflare_zone.this.id
   type    = "CNAME"
   name    = var.web_sites[count.index].dns_name
-  value   = aws_s3_bucket.web[count.index].website_endpoint
+  value   = aws_cloudfront_distribution.this[count.index].domain_name
   ttl     = var.web_sites[count.index].dns_ttl
   proxied = var.web_sites[count.index].proxied
 }
